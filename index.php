@@ -7,9 +7,11 @@
         <link rel="icon" type="image/jpg" href="./img/LogoIsitec.png"/>
         <link rel="stylesheet" href="./css/estils.css">
     </head>
-    <body>
+    <body id="bodyIndex">
         <main>
             <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
+
+                <h1>Login ISITEC</h1>
 
                 <!-- MAIL -->
                 <label for="user">Correu Electrònic</label>
@@ -30,15 +32,10 @@
                 <!-- SUBMIT -->
                 <button class="button" type="submit"><span>Login</span></button>
 
-                
+                <p>Encara no tens un compte?</p>
+                <button class="button" type="submit"><span>Sign in</span></button>
 
             </form>
         </main>
-
-        <aside>
-            <p>Encara no tens un compte?</p>
-            <button class="button" type="submit"><span>Sign in</span></button>
-        </aside>
-        
     </body>
 </html>

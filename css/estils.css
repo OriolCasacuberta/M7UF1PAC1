@@ -3,3 +3,11 @@
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+#bodyIndex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
