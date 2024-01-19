@@ -7,6 +7,8 @@
         <link rel="icon" type="image/jpg" href="./img/LogoIsitec.png"/>
     </head>
     <body>
-        <p>La meva web: Oriol-Mario</p>
+        <main>
+            <img src="./img/LogoIsitec.png" alt="LogoIsitec">
+        </main>
     </body>
 </html>
