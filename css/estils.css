@@ -1,13 +1,124 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
-#bodyIndex{
+html, 
+body {
+    margin-top: 1.5em;
+    width: 100%;
+    background: rgb(180, 230, 255);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+}
 
+main {
+    border-radius: 12px;
+    background-color: #ededed;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    padding: 1rem;
+    height: 90%;
+    width: 80%;
+}
+
+main > *{
+    margin: 0.5em;
+}
+
+form > * {
+    padding: 0em;
+}
+
+main > h1{
+    text-transform: uppercase;
+    font-size: 50px;
+}
+
+main > h2{
+    margin-bottom: 1em;
+}
+
+main > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+input{
+    text-align: center;
+    display: block;
+    border: none;
+    border-bottom: 2px solid black;
+    width: 50%;
+    outline: none;
+    background: none;
+    margin-bottom: 1em;
+    font-size: 1.15em;
+}
+
+.button.logout{
+    padding: 1em;
+}
+
+button {
+    margin-top: 1em;
+    display: inline-block;
+    border-radius: 8px;
+    background-color: rgb(0, 110, 255);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: large;
+    width: 30%;
+    transition: all 0.5s;
+    cursor: pointer;
+    padding: 10px;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+button:hover span {
+    padding-right: 25px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+aside{
+    width: 50%;
+}
+
+aside > p{
+    padding-top: 20px; ;
+}
+
+aside > button span {
+    padding-left: 35px;
+    padding-right: 35px;
 }
 
