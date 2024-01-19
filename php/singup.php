@@ -12,7 +12,7 @@
             <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
 
                 <!-- USERNAME -->
-                <label for="user">Username</label>
+                <label for="user"><b>Username</b></label>
                 <br>
                 <input id="username" name="user" type="text" placeholder="Introdueix el nom d'usuari" autofocus required>
 
@@ -20,7 +20,7 @@
                 <br>
 
                 <!-- MAIL -->
-                <label for="email">Email</label>
+                <label for="email"><b>Email</b></label>
                 <br>
                 <input id="email" name="email" type="email" placeholder="Introdueix el correu electrònic" autofocus required>
 
@@ -28,7 +28,7 @@
                 <br>
 
                 <!-- FIRST NAME -->
-                <label for="firstName">First Name</label>
+                <label for="firstName"><b>First Name</b></label>
                 <br>
                 <input id="firstName" name="firstName" type="text" placeholder="Introdueix el nom" autofocus required>
 
@@ -36,7 +36,7 @@
                 <br>
 
                 <!-- LAST NAME -->
-                <label for="lastName">Last Name</label>
+                <label for="lastName"><b>Last Name</b></label>
                 <br>
                 <input id="lastName" name="lastName" type="text" placeholder="Introdueix el cognom" autofocus required>
 
@@ -44,7 +44,7 @@
                 <br>
 
                 <!-- CONTRASENYA -->
-                <label for="contrasenya">Password</label>
+                <label for="contrasenya"><b>Password</b></label>
                 <br>
                 <input id="contrasenya" name="contrasenya" type="password" placeholder="Introdueix el password" required>
 
@@ -52,7 +52,7 @@
                 <br>
 
                 <!-- VERIFY CONTRASENYA -->
-                <label for="verifyContrasenya">Verify Password</label>
+                <label for="verifyContrasenya"><b>Verify Password</b></label>
                 <br>
                 <input id="verifyContrasenya" name="verifyContrasenya" type="password" placeholder="Torna a escriure la contrasenya" required>
 

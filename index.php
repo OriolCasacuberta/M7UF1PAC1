@@ -13,14 +13,14 @@
             <h1>LOGIN ISITEC</h1>
             <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
                 <!-- MAIL -->
-                <label for="user" class="labelInput">EMAIL</label>
+                <label for="user" class="labelInput"><b>EMAIL</b></label>
                 <br>
                 <input id="user" name="user" type="email" placeholder="Introdueix el teu correu electrònic" autofocus required class="labelInput">
 
                 <br>
 
                 <!-- CONTRASENYA -->
-                <label for="contrasenya" class="labelInput">PASSWORD</label>
+                <label for="contrasenya" class="labelInput"><b>PASSWORD</b></label>
                 <br>
                 <input id="contrasenya" name="contrasenya" type="password" placeholder="Introdueix la teva contrasenya" required class="labelInput">
 
