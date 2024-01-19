@@ -1,0 +1,12 @@
+aside{
+    width: 50%;
+}
+
+aside > p{
+    padding-top: 20px; ;
+}
+
+aside > button span {
+    padding-left: 35px;
+    padding-right: 35px;
+}
