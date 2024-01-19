@@ -37,8 +37,8 @@
 
         <aside>
             <p>Encara no tens un compte?</p>
+            <button class="button" type="submit"><span>Sign in</span></button>
         </aside>
-
-        <button class="button" type="submit"><span>Sign in</span></button>
+        
     </body>
 </html>
