@@ -4,12 +4,14 @@
         <meta charset="utf-8">
         <title>Home Web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/estils.css">
+
     </head>
     <body>
         <main>
 
-            //TODO: Buscar imagen de fondo y poner el texto por encima en cuado blanco com padding
-            <img src="../img/LogoIsitec.png" alt="LogoIsitec">
+            <!-- Buscar imagen de fondo y poner el texto por encima en cuado blanco com padding -->
+
             <h1>BENVINGUT</h1>
 
         </main>
