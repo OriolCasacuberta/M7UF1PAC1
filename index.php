@@ -1,10 +1,11 @@
 <!--PHP-->
 <?php
-    //menssaje de error
+    // Mensaje de error
     $error = '';
 
-    //nos asseguramos que el metodo de REQUEST se POST
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+    // Nos asseguramos que el metodo de REQUEST se POST
+    if($_SERVER["REQUEST_METHOD"] == "POST")
+    {
 
         if(count($_POST)==2){
             //TODO: REVISAR LOS FILTER_INPUT, REVISAR WEB JOSEP
@@ -14,8 +15,9 @@
             $pass   = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
             $logged = verificaUsuari($mail,$pass);
             
-            if($logged!==false){
-                //creem la sessio
+            if($logged!==false)
+            {
+                // Creem la sessio
                 session_start();
                 //TODO:PREGUNTAR JOSEP, QUE DATOS GUARDAR EXACTAMENTE
                 $_SESSION['id'] = $logged['iduser'];
@@ -27,16 +29,13 @@
 
                 //exit()= recomendable por la redireccion de ficheros
                 exit();
-            }else{
-                $error = "Revisa l'adreça de correu/username i/o la contrasenya";
             }
+            
+            else $error = "Revisa l'adreça de correu/username i/o la contrasenya";
 
         }
-        else{
-            $error = "User or Password are require!";
-        }
-
-
+        
+        else $error = "User or Password are require!";
     }
 ?>
 
@@ -49,6 +48,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/jpg" href="./img/LogoIsitec.png"/>
         <link rel="stylesheet" href="./css/estils.css">
+        <link rel="stylesheet" href="./css/index.css">
     </head>
     <body>
         <main>
