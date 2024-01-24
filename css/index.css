@@ -10,3 +10,16 @@ aside > button span {
     padding-left: 35px;
     padding-right: 35px;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+input
+{
+    width: 60%;
+}
