@@ -7,10 +7,11 @@
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
 
-        if(count($_POST)==2)
-        {
-            // Filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL) = VERIFICA QUE SIGUI UN EMAIL I EVITA INJECCIONS DE DADES
-            $user   = isset($_POST["user"]) ? filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL) : "";
+        if(count($_POST)==2){
+            //TODO: REVISAR LOS FILTER_INPUT, REVISAR WEB JOSEP
+            //filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL) =VERIFICA QUE SIGUI UN EMAIL I EVITA INJECCIONS DE DADES
+            $user   = isset($_POST["user"]) ? filter_input(INPUT_POST,'user',FILTER_SANITIZE_EMAIL) : "";
+            $user   = isset($_POST["user"]) ? filter_input(INPUT_POST,'user',FILTER_SANITIZE_STRING) : "";
             $pass   = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
             $logged = verificaUsuari($mail,$pass);
             
@@ -18,12 +19,15 @@
             {
                 // Creem la sessio
                 session_start();
-                
-                //$_SESSION['user'] = $logged['idUsuari'];
-                //$_SESSION['pass'] = $logged['name']; 
-                // Fem la redireccio
+                //TODO:PREGUNTAR JOSEP, QUE DATOS GUARDAR EXACTAMENTE
+                $_SESSION['id'] = $logged['iduser'];
+                $_SESSION['user'] = $logged['username'];
+                $_SESSION['pass'] = $logged['passHash']; 
+
+                //fem la redireccio
                 header("Location: ./php/home.php");
-                // Exit() = recomendable por la redireccion de ficheros
+
+                //exit()= recomendable por la redireccion de ficheros
                 exit();
             }
             
@@ -72,7 +76,7 @@
             <aside>
                 <!-- SIGN UP -->
                 <p>Encara no tens un compte?</p>
-                <button class="button" type="submit"><span>Sign in</span></button>
+                <button class="button" type="submit"><a href="./php/home.php"><span>Sign in</span></a></button>
             </aside>
 
         </main>
