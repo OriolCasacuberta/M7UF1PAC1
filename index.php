@@ -2,16 +2,17 @@
 <?php
     // Mensaje de error
     $error = '';
+    $strict = false;
 
     // Nos asseguramos que el metodo de REQUEST se POST
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
 
         if(count($_POST)==2){
-            //TODO: REVISAR LOS FILTER_INPUT, REVISAR WEB JOSEP
+            //TODO: PREGUNTAR JOSEP SI ES CORRECTA ESTA FORMA
+            $username=sanitize_user($user,$strict);
             //filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL) =VERIFICA QUE SIGUI UN EMAIL I EVITA INJECCIONS DE DADES
-            $user   = isset($_POST["user"]) ? filter_input(INPUT_POST,'user',FILTER_SANITIZE_EMAIL) : "";
-            $user   = isset($_POST["user"]) ? filter_input(INPUT_POST,'user',FILTER_SANITIZE_STRING) : "";
+            $username   = isset($_POST["username"]) ? $_POST["username"] : "";
             $pass   = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
             $logged = verificaUsuari($mail,$pass);
             
@@ -30,11 +31,9 @@
                 //exit()= recomendable por la redireccion de ficheros
                 exit();
             }
-            
             else $error = "Revisa l'adreça de correu/username i/o la contrasenya";
 
         }
-        
         else $error = "User or Password are require!";
     }
 ?>

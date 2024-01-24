@@ -13,6 +13,7 @@
             <!-- Buscar imagen de fondo y poner el texto por encima en cuado blanco com padding -->
 
             <h1>BENVINGUT</h1>
+            <div id="fotoLogo"></div>
 
         </main>
         <aside>

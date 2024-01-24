@@ -14,6 +14,29 @@ function getConnection(){
     }
 }
 
+function sanitize_user($user,$strict){
+
+    $raw_username = $user;
+	$user     = wp_strip_all_tags( $user );
+	$user     = remove_accents( $user );
+	// Remove percent-encoded characters.
+	$user = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '', $user );
+	// Remove HTML entities.
+	$user = preg_replace( '/&.+?;/', '', $user );
+
+	// If strict, reduce to ASCII for max portability.
+	if ( $strict ) {
+		$user = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $user );
+	}
+
+	$user = trim( $user );
+	// Consolidate contiguous whitespace.
+	$user = preg_replace( '|\s+|', ' ', $user );
+
+	return apply_filters( 'sanitize_user', $user, $raw_username, $strict );
+}
+
+
 function verificaUsuari($mail, $pass){
     $result = false;
     $conn   = getConnection();
