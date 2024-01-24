@@ -75,7 +75,7 @@
             <aside>
                 <!-- SIGN UP -->
                 <p>Encara no tens un compte?</p>
-                <button class="button" type="submit"><a href="./php/home.php"><span>Sign in</span></a></button>
+                <button class="button" type="submit"><a href="./php/signup.php"><span>Sign in</span></a></button>
             </aside>
 
         </main>
