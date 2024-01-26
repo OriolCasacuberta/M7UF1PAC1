@@ -1,3 +1,7 @@
 #fotoLogo{
     background-image: ("../img/llaveInglesa.PNG");
 }
+
+.button.logout{
+    padding: 1em;
+}

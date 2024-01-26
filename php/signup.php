@@ -62,9 +62,6 @@
 
                 <!-- SUBMIT -->
                 <button class="button" type="submit"><span>Sign Up</span></button>
-
-                
-
             </form>
         </main>
     </body>
