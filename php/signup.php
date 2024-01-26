@@ -10,6 +10,8 @@
     </head>
     <body>
         <main>
+
+            <h1>CREATE ACCOUNT</h1>
             <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
 
                 <!-- USERNAME -->

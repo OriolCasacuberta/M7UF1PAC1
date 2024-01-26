@@ -19,14 +19,4 @@ main {
     align-items: center;
 }
 
-input{
-    text-align: center;
-    display: block;
-    border: none;
-    border-bottom: 2px solid black;
-    outline: none;
-    background: none;
-    margin-bottom: 1em;
-    font-size: 1.15em;
-    width: 60%;
-}
+

@@ -72,6 +72,18 @@ main > form{
     width: 90%;
 }
 
+input{
+    text-align: center;
+    display: block;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    background: none;
+    margin-bottom: 1em;
+    font-size: 1.15em;
+    width: 60%;
+}
+
 button {
     margin-top: 1em;
     display: inline-block;
@@ -86,6 +98,10 @@ button {
     transition: all 0.5s;
     cursor: pointer;
     padding: 10px;
+}
+
+button.signup {
+    width: 70%;
 }
 
 button span {
@@ -113,6 +129,10 @@ button:hover span:after {
     right: 0;
 }
 
+a {
+    color: #FFFFFF;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .col-xs-1 {width: 8.33%;}
@@ -128,9 +148,7 @@ button:hover span:after {
     .col-xs-11 {width: 91.66%;}
     .col-xs-12 {width: 100%;}
 
-    button {
-        width: 50%;
-    }
+    
 
 
 
