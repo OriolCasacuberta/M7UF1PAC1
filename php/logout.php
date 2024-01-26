@@ -1,11 +1,11 @@
 <?php
 session_start();
-//vaciamos la variable $_SESSION
+// Vaciamos la variable $_SESSION
 $_SESSION = [];
-//eliminamos las cookies
+// Eliminamos las cookies
 setcookie(session_name(),'',time()-3600,'/');
-//destruye la sesion
+// Destruye la sesion
 session_destroy();
-//redirigimos al fichero index.php
+// Redirigimos al fichero index.php
 header("Location: ../index.php");
 exit();
