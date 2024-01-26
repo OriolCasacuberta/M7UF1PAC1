@@ -36,29 +36,64 @@ function sanitize_user($user,$strict){
 	return apply_filters( 'sanitize_user', $user, $raw_username, $strict );
 }
 
+function verificarSiEsUserOMail($user,$esMail,$esUser){
 
-function verificaUsuari($mail, $pass){
-    $result = false;
-    $conn   = getConnection();
-    $sql    = "SELECT 'iduser','passHash' FROM `usuaris` WHERE 'mail'=:mail";
-
-    try {
-        
-        $usuaris = $conn->prepare($sql);
-        $usuaris->execute([':mail'=>$mail]);
-        if($usuaris->rowCount()==1){
-            $dadesUsuari = $usuaris->fetch(PDO::FETCH_ASSOC);
-            if(password_verify($pass,$dadesUsuari['passHash'])){
-                $result = ['iduser'=>$dadesUsuari['iduser'],'pass'=>$dadesUsuari['passHash']];
-            }
-        }
-
-    } catch (PDOException $e) {
-        echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
+    if (substr_count($user, '@') == 1){
+        $esMail=true;
     }
-    finally{
-        return $result;
+    else{
+        $esUser=true;
     }
 }
+
+function verificaUsuari($user, $pass,$esMail,$esUser){
+    $result = false;
+    $conn   = getConnection();
+
+    if(esMail==true){
+
+        $sql    = "SELECT 'iduser','username','passHash' FROM 'usuaris' WHERE $user=:mail";
+        try {
+            
+            $usuarisMail = $conn->prepare($sql);
+            $usuarisMail->execute([':mail'=>$user]);
+            if($usuarisMail->rowCount()==1){
+                $dadesUsuari = $usuarisMail->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($pass,$dadesUsuari['passHash'])){
+                    $result = ['iduser'=>$dadesUsuari['iduser'], 'user'=> $dadesUsuari['username'],'pass'=>$dadesUsuari['passHash']];
+                }
+            }
+
+        } catch (PDOException $e) {
+            echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
+        }
+        
+    }
+    else{
+        
+        $sql    = "SELECT 'iduser','username','passHash' FROM 'usuaris' WHERE $user=:username";
+        try {
+            
+            $usuarisName = $conn->prepare($sql);
+            $usuarisName->execute([':mail'=>$user]);
+            if($usuarisName->rowCount()==1){
+                $dadesUsuari = $usuarisName->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($pass,$dadesUsuari['passHash'])){
+                    $result = ['iduser'=>$dadesUsuari['iduser'], 'user'=> $dadesUsuari['username'],'pass'=>$dadesUsuari['passHash']];
+                }
+            }
+
+        } catch (PDOException $e) {
+            echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
+        }
+        
+    }
+
+    return $result;
+
+    
+}
+
+
 
 

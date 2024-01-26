@@ -1,41 +1,56 @@
 <!--PHP-->
 <?php
-    // Mensaje de error
-    $error = '';
-    $strict = false;
 
-    // Nos asseguramos que el metodo de REQUEST se POST
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
+    require "./lib/controlUserBD.php";
 
-        if(count($_POST)==2){
-            //TODO: PREGUNTAR JOSEP SI ES CORRECTA ESTA FORMA
-            $username=sanitize_user($user,$strict);
-            //filter_input(INPUT_POST,'email',FILTER_SANITIZE_EMAIL) =VERIFICA QUE SIGUI UN EMAIL I EVITA INJECCIONS DE DADES
-            $username   = isset($_POST["username"]) ? $_POST["username"] : "";
-            $pass   = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
-            $logged = verificaUsuari($mail,$pass);
+    function procesarLogIn(){
+        htmlspecialchars($_SERVER["PHP_SELF"]); 
+
+        // Mensaje de error
+        $error = '';
+        $strict = false;
+        $esMail = false;
+        $esUser = false;
+
+        // Nos asseguramos que el metodo de REQUEST se POST
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+
+            if(count($_POST)==2){
+                
+                echo var_dump($_POST);
+                verificarSiEsUserOMail($user,$esMail,$esUser);
+                //TODO: VERIFICAR SI ESTA ACTIVO
+                $username = sanitize_user($user,$strict);
+                $username = isset($_POST["username"]) ? $_POST["username"] : "";
+                $pass     = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
+                $logged   = verificaUsuari($username,$pass,$esMail,$esUser);
+                $active   = $_POST["active"];
             
-            if($logged!==false)
-            {
-                // Creem la sessio
-                session_start();
-                //TODO:PREGUNTAR JOSEP, QUE DATOS GUARDAR EXACTAMENTE
-                $_SESSION['id'] = $logged['iduser'];
-                $_SESSION['user'] = $logged['username'];
-                $_SESSION['pass'] = $logged['passHash']; 
+                if($logged!==false && $active == 0)
+                {
+                    //Creem la sessio
+                    session_start();
+                    $_SESSION['user'] = $logged['username'];
+                    $_SESSION['pass'] = $logged['passHash']; 
 
-                //fem la redireccio
-                header("Location: ./php/home.php");
+                    //fem la redireccio
+                    header("Location: ./php/home.php");
+                    
+                    actualitzarDataLastLogIn();
 
-                //exit()= recomendable por la redireccion de ficheros
-                exit();
+                    //exit()= recomendable por la redireccion de ficheros
+                    exit();
+                }
+                else{
+                    $error = "Revisa l'adreça de correu/username i/o la contrasenya";
+                } 
+
             }
-            else $error = "Revisa l'adreça de correu/username i/o la contrasenya";
-
+            else $error = "User or Password are require!";
         }
-        else $error = "User or Password are require!";
     }
+    
 ?>
 
 <!--FORMULARI-->
@@ -53,14 +68,15 @@
         <main>
 
             <h1>LOGIN ISITEC</h1>
-            <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
-                <!-- MAIL -->
+            <form method = "post" action="<?php procesarLogIn()?>">
+            <!-- MAIL -->
                 <label for="user" class="labelInput"><b>EMAIL</b></label>
                 <br>
-                <input id="user" name="user" type="email" placeholder="Introdueix el teu correu electrònic" autofocus required class="labelInput">
+                <input id="user" name="user" type="text" placeholder="Introdueix email o nom d'usuari" autofocus required class="labelInput">
 
                 <br>
 
+                <!--REVISAR ESTE INPUT-->
                 <!-- CONTRASENYA -->
                 <label for="contrasenya" class="labelInput"><b>PASSWORD</b></label>
                 <br>
