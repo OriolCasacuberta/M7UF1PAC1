@@ -33,10 +33,7 @@ function sanitize_user($user,$strict)
 	$user = preg_replace( '/&.+?;/', '', $user );
 
 	// If strict, reduce to ASCII for max portability.
-	if ( $strict )
-    {
-		$user = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $user );
-	}
+	if ( $strict ) $user = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $user );
 
 	$user = trim( $user );
 	// Consolidate contiguous whitespace.
@@ -47,15 +44,8 @@ function sanitize_user($user,$strict)
 
 function verificarSiEsUserOMail($user,&$esMail,&$esUser)
 {
-    if (substr_count($user, '@') == 1)
-    {
-        $esMail=true;
-    }
-
-    else
-    {
-        $esUser=true;
-    }
+    if (substr_count($user, '@') == 1) $esMail=true;
+    else $esUser=true;
 }
 
 function verificaUsuari($user, $pass,$esMail,$esUser)

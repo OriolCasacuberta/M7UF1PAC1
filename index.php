@@ -48,10 +48,7 @@
                     exit();
                 }
 
-                else
-                {
-                    $error = "Revisa l'adreça de correu/username i/o la contrasenya";
-                }
+                else $error = "Revisa l'adreça de correu/username i/o la contrasenya";
             }
             
             else $error = "User or Password are require!";
@@ -73,7 +70,6 @@
     </head>
     <body>
         <main>
-
             <h1>LOGIN ISITEC</h1>
             <form method = "post" action="<?php procesarLogIn()?>">
             <!-- MAIL -->
@@ -100,7 +96,6 @@
                 <p>Encara no tens un compte?</p>
                 <button class="button" type="submit" class="signup"><a href="./php/signup.php"><span>Sign in</span></a></button>
             </aside>
-
         </main>
     </body>
 </html>
