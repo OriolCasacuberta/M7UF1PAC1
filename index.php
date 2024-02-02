@@ -3,7 +3,8 @@
 
     require "./lib/controlUserBD.php";
 
-    function procesarLogIn(){
+    function procesarLogIn()
+    {
         htmlspecialchars($_SERVER["PHP_SELF"]); 
 
         // Mensaje de error
@@ -15,14 +16,18 @@
         // Nos asseguramos que el metodo de REQUEST se POST
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
+            if(count($_POST)==2)
+            {
+                //echo "<scri;>console.log('Debug Objects: " . var_dump($_POST) . "' );</script>";
 
-            if(count($_POST)==2){
-                
-                echo var_dump($_POST);
+                //$username = $_POST["user"];
+                $user = $_POST["user"];
+
+
                 verificarSiEsUserOMail($user,$esMail,$esUser);
                 //TODO: VERIFICAR SI ESTA ACTIVO
                 $username = sanitize_user($user,$strict);
-                $username = isset($_POST["username"]) ? $_POST["username"] : "";
+                $username = isset($_POST["user"]) ? $_POST["user"] : "";
                 $pass     = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
                 $logged   = verificaUsuari($username,$pass,$esMail,$esUser);
                 $active   = $_POST["active"];
@@ -37,16 +42,18 @@
                     //fem la redireccio
                     header("Location: ./php/home.php");
                     
-                    actualitzarDataLastLogIn();
+                    //actualitzarDataLastLogIn();
 
                     //exit()= recomendable por la redireccion de ficheros
                     exit();
                 }
-                else{
-                    $error = "Revisa l'adreça de correu/username i/o la contrasenya";
-                } 
 
+                else
+                {
+                    $error = "Revisa l'adreça de correu/username i/o la contrasenya";
+                }
             }
+            
             else $error = "User or Password are require!";
         }
     }

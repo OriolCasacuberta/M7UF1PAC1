@@ -8,12 +8,12 @@
         <link rel="stylesheet" href="../css/home.css">
 
 
-
+        
     </head>
     <body>
         <main>
 
-            <!-- Buscar imagen de fondo y poner el texto por encima en cuado blanco com padding -->
+            <!-- Buscar imagen de fondo y poner el texto por encima en cuado blanco con padding -->
 
             <h1>BENVINGUT</h1>
             <div id="fotoLogo"></div>
