@@ -23,7 +23,6 @@
                 //$username = $_POST["user"];
                 $user = $_POST["user"];
 
-
                 verificarSiEsUserOMail($user,$esMail,$esUser);
                 //TODO: VERIFICAR SI ESTA ACTIVO
                 $username = sanitize_user($user,$strict);
