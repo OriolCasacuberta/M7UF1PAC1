@@ -64,7 +64,7 @@
 
                 <!-- SUBMIT -->
                 <button class="button" type="submit"><span>Sign Up</span></button>
-                //! Mario vas a morir
+                <!-- Cambiar direccion de las flechas content 'content: '\00ab''-->
                 <button class="button" type="submit" id="back"><a href="./php/login.php"><span>Back to Log in</span></a></button>
             </form>
         </main>
