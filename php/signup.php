@@ -64,6 +64,8 @@
 
                 <!-- SUBMIT -->
                 <button class="button" type="submit"><span>Sign Up</span></button>
+                //! Mario vas a morir
+                <button class="button" type="submit" id="back"><a href="./php/login.php"><span>Back to Log in</span></a></button>
             </form>
         </main>
     </body>

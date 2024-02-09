@@ -87,6 +87,15 @@ button span {
     transition: 0.5s;
 }
 
+#back:after {
+    content: '\00ab';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: +20px;
+    transition: 0.5s;
+}
+
 button span:after {
     content: '\00bb';
     position: absolute;
