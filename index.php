@@ -3,6 +3,7 @@
 
     require "./lib/controlUserBD.php";
 
+
     function procesarLogIn()
     {
         htmlspecialchars($_SERVER["PHP_SELF"]); 
@@ -30,30 +31,69 @@
                 $pass     = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
                 $logged   = verificaUsuari($username,$pass,$esMail,$esUser);
                 $active   = $_POST["active"];
-            
-                if($logged!==false && $active == 0)
-                {
-                    //Creem la sessio
-                    session_start();
-                    $_SESSION['user'] = $logged['username'];
-                    $_SESSION['pass'] = $logged['passHash']; 
 
-                    //fem la redireccio
-                    header("Location: ./php/home.php");
+    function procesarLogIn(){
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+                $phpSelf = htmlspecialchars($_SERVER["PHP_SELF"]); 
+
+                // Mensaje de error
+                $error = '';
+                $strict = false;
+                $esMail = false;
+                $esUser = false;
+
+                
+                echo "VARDUMP: ".var_dump($_POST);
+
+                $user= $_POST["user"];
+                $pass= $_POST["contrasenya"];
+
+                    // Nos asseguramos que el metodo de REQUEST se POST
+                
+                    if(count($_POST)==2){
+                        echo var_dump($_POST);
+                        verificarSiEsUserOMail($user,$esMail,$esUser);
+                        
+
+                        //actualitzarDataLastLogIn();
+
+                        $username = sanitize_user($user,$strict);
+                        $username = isset($_POST["username"]) ? $_POST["username"] : "";
+                        $pass     = isset($_POST["pass"]) ? filter_input(INPUT_POST,'pass',FILTER_SANITIZE_STRING) : "";
+                        
+                        $logged   = verificaUsuari($username,$pass,$esMail,$esUser);
+                        $active   = $_POST["active"];
                     
-                    //actualitzarDataLastLogIn();
+                        if($logged!==false && $active == 0)
+                        {
+                            //Creem la sessio
+                            session_start();
+                            $_SESSION['user'] = $logged['username'];
+                            $_SESSION['pass'] = $logged['passHash']; 
 
-                    //exit()= recomendable por la redireccion de ficheros
-                    exit();
+                            //fem la redireccio
+                            header("Location: ./php/home.php");
+                            
+                            //TODO: FUNCION LAST LOGIN 
+                            actualitzarDataLastLogIn();
+
+                            //exit()= recomendable por la redireccion de ficheros
+                            exit();
+                        }
+                        else{
+                            $error = "Revisa l'adreça de correu/username i/o la contrasenya";
+                        } 
+
+
+                    }
+                    else $error = "Revisa l'adreça de correu/username i/o la contrasenya";
                 }
-
-                else $error = "Revisa l'adreça de correu/username i/o la contrasenya";
+                else $error = "User or Password are require!";
             }
-            
-            else $error = "User or Password are require!";
         }
     }
-    
+}
 ?>
 
 <!--FORMULARI-->

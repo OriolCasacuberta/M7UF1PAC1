@@ -1,4 +1,6 @@
 <?php
+//include "wp-includes/formatting.php";
+
 
 function getConnection()
 {
@@ -23,21 +25,27 @@ function getConnection()
 function sanitize_user($user,$strict)
 {
     $raw_username = $user;
-	$user     = wp_strip_all_tags( $user );
-	$user     = remove_accents( $user );
+	$user     = wp_strip_all_tags($user);
+	$user     = remove_accents($user);
 	// Remove percent-encoded characters.
-	$user = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '', $user );
+	$user = preg_replace('|%([a-fA-F0-9][a-fA-F0-9])|', '', $user);
 	// Remove HTML entities.
 	$user = preg_replace( '/&.+?;/', '', $user );
 
 	// If strict, reduce to ASCII for max portability.
+
 	if ( $strict ) $user = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $user );
+
+	if ( $strict ) {
+		$user = preg_replace('|[^a-z0-9 _.\-@]|i', '', $user);
+	}
+
 
 	$user = trim( $user );
 	// Consolidate contiguous whitespace.
-	$user = preg_replace( '|\s+|', ' ', $user );
+	$user = preg_replace('|\s+|', ' ', $user);
 
-	return apply_filters( 'sanitize_user', $user, $raw_username, $strict );
+	return apply_filters('sanitize_user', $user, $raw_username, $strict);
 }
 
 function verificarSiEsUserOMail($user,&$esMail,&$esUser)
@@ -96,10 +104,23 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
             echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
         }  
     }
-
     return $result;
 }
 
+
+function usuarioExistente($conn, $username, $email) {
+
+    $stmt = $conn->prepare("SELECT iduser FROM users WHERE username = $username OR mail = $email");
+    //ss, represta que le pasamos 2 string 
+    $stmt->bind_param("ss", $username, $email);
+    $stmt->execute();
+    $stmt->store_result();
+    $rows = $stmt->num_rows;
+    $stmt->close();
+
+    return $rows > 0;
+}
+?>
 
 
 

@@ -1,3 +1,50 @@
+<?php
+    require "./lib/controlUserBD.php";
+
+    //CONECTAR CON LA BASE DE DADTOS
+    $conn = getConnection();
+
+    //SIGN UP USUARIO
+    $phpSelf = htmlspecialchars($_SERVER["PHP_SELF"]); 
+    
+    function procesarSignUp(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $username = $_POST["user"];
+            $email = $_POST["email"];
+            $firstName = $_POST["firstName"];
+            $lastName = $_POST["lastName"];
+            $password = $_POST["contrasenya"];
+            $verifyPassword = $_POST["verifyContrasenya"];
+
+            if (usuarioExistente($conn, $username, $email)) {
+                echo "Error: El usuario o correo electrónico ya existe.";
+            }
+            else{
+                // Verificar si las contraseñas coinciden
+                if ($password === $verifyPassword) {
+                    // Hash de la contraseña
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                    // Insertar nuevo usuario en la base de datos
+                    $stmt = $conn->prepare("INSERT INTO users (mail, username, passHash, userFirstName, userLastName, creationDate, active) VALUES ($email, $username, $hashedPassword, $firstName, $lastName, NOW(), 1)");
+                    $stmt->bind_param("sssss", $email, $username, $hashedPassword, $firstName, $lastName);
+
+                    if ($stmt->execute()) {
+                        echo "Registro exitoso";
+                    } else {
+                        echo "Error al registrar el usuario: " . $stmt->error;
+                    }
+
+                    $stmt->close();
+                
+                }
+            }
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="ca">
     <head>
@@ -11,8 +58,12 @@
     <body>
         <main>
 
+
             <h1>CREATE ACCOUNT</h1>
             <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
+
+            <form method = "post" action="<?=procesarSignUp()?>">
+
 
                 <!-- USERNAME -->
                 <label for="user"><b>USERNAME</b></label>
