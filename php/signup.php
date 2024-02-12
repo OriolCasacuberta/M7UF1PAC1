@@ -63,15 +63,9 @@
                 <br>
 
                 <!-- SUBMIT -->
-<<<<<<< HEAD
-                <button class="button" type="submit"><span>Sign Up</span></button>
-                <!-- Cambiar direccion de las flechas content 'content: '\00ab''-->
-                <button class="button" type="submit" id="back"><a href="./php/login.php"><span>Back to Log in</span></a></button>
-=======
                 <button class="button" type="submit" id="signUpButton"><span>Sign Up</span></button>
                 
                 <button class="button" type="submit" id="back"><a href="../index.php"><span>Back to Log in</span></a></button>
->>>>>>> 1c44656c47b11d08d6649720244316426993aefe
             </form>
         </main>
     </body>
