@@ -11,8 +11,14 @@ CREATE TABLE IF NOT EXISTS users(
     creationDate Datetime,
     removeDate Datetime,
     lastSignIn Datetime,
-    active TinyInt(1)
-    
+    active TinyInt(1),
+
+    -- actualizacion
+
+    activationDate DateTime,
+	activationCode Char(64),
+	resetPassExpiry DateTime,
+	resetPassCode Char(64)
 );
 
 INSERT INTO users (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active)

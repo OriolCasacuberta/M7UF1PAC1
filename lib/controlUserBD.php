@@ -10,12 +10,10 @@ function getConnection()
     {
         $db = new PDO($connString,$user,$pass,[PDO::ATTR_PERSISTENT => True]);
     }
-    
     catch(PDOException $e)
     {
         echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
     }
-    
     finally
     {
         return $db;
@@ -75,7 +73,6 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
             echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
         }
     }
-
     else
     {
         $sql = "SELECT iduser, username, passHash  FROM usuaris WHERE username=:username";
