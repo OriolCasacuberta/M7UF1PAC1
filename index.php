@@ -94,6 +94,9 @@
                 <!-- SIGN UP -->
                 <p>Encara no tens un compte?</p>
                 <button class="button" type="submit" class="signup"><a href="./php/signup.php"><span>Sign in</span></a></button>
+                <br>
+                <br>
+                <a id="fpass" href="" onclick=resetPassword()>Forgot Password?</a>
             </aside>
         </main>
     </body>

@@ -100,6 +100,9 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
     return $result;
 }
 
-
+function resetPassword()
+{
+    echo "<script>alert(TODO);</script>";
+}
 
 

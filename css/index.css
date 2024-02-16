@@ -40,3 +40,8 @@ button span:after {
 button:hover span {
     padding-right: 25px;
 }
+
+#fpass {
+    font-size: 12px;
+    color: black;
+}
