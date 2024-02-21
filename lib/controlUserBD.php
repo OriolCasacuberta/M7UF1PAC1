@@ -1,56 +1,52 @@
 <?php
-//include "wp-includes/formatting.php";
 
+define('DB_HOST', 'localhost');
+define('DB_DATABASE', 'isitec');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 
 function getConnection()
 {
-    $connString = 'mysql:host'. DB_HOST . ';port=3306;dbname=' . DB_DATABASE .';charset=utf8';
+    $connString = 'mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE . ';charset=utf8';
     $user = DB_USER;
     $pass = DB_PASSWORD;
     $db = null;
-    try
-    {
-        $db = new PDO($connString,$user,$pass,[PDO::ATTR_PERSISTENT => True]);
-    }
-    catch(PDOException $e)
-    {
+
+    try {
+        $db = new PDO($connString, $user, $pass, [PDO::ATTR_PERSISTENT => true]);
+    } catch (PDOException $e) { 
         echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
-    }
-    finally
-    {
+    } finally {
         return $db;
     }
 }
 
-function sanitize_user($user,$strict)
+function sanitize_user($user,$strict = false)
 {
-    $raw_username = $user;
-	$user     = wp_strip_all_tags($user);
-	$user     = remove_accents($user);
-	// Remove percent-encoded characters.
-	$user = preg_replace('|%([a-fA-F0-9][a-fA-F0-9])|', '', $user);
-	// Remove HTML entities.
-	$user = preg_replace( '/&.+?;/', '', $user );
-
-	// If strict, reduce to ASCII for max portability.
-
-	if ( $strict ) $user = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $user );
-
-	if ( $strict ) {
-		$user = preg_replace('|[^a-z0-9 _.\-@]|i', '', $user);
-	}
-
-
-	$user = trim( $user );
-	// Consolidate contiguous whitespace.
-	$user = preg_replace('|\s+|', ' ', $user);
-
-	return apply_filters('sanitize_user', $user, $raw_username, $strict);
+   // Eliminar etiquetas HTML
+   $user = strip_tags($user);
+    
+   // Eliminar acentos
+   $user = iconv('UTF-8', 'ASCII//TRANSLIT', $user);
+   
+   // Eliminar caracteres especiales
+   $user = preg_replace('/[^a-zA-Z0-9 _.\-@]/', '', $user);
+   
+   // Reducir a ASCII si strict es true
+   if ($strict) {
+       $user = preg_replace('/[^a-zA-Z0-9_\-@]/', '', $user);
+   }
+   
+   // Eliminar espacios adicionales
+   $user = trim($user);
+   $user = preg_replace('/\s+/', ' ', $user);
+   
+   return $user;
 }
 
 function verificarSiEsUserOMail($user,&$esMail,&$esUser)
 {
-    if (substr_count($user, '@') == 1) $esMail=true;
+    if (filter_var($user, FILTER_VALIDATE_EMAIL)) $esMail=true;
     else $esUser=true;
 }
 
@@ -75,10 +71,10 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
                 }
             }
         } 
-        
         catch (PDOException $e)
         {
-            echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
+            error_log("Error de base de datos (mails): " . $e->getMessage(), 3, "error.log");
+            echo "<p style=\"color:red;\">Ocurrió un error, por favor inténtalo de nuevo más tarde</p>";
         }
     }
     else
@@ -88,7 +84,7 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
         {
             
             $usuarisName = $conn->prepare($sql);
-            $usuarisName->execute([':mail'=>$user]);
+            $usuarisName->execute([':username'=>$user]);
             if($usuarisName->rowCount()==1)
             {
                 $dadesUsuari = $usuarisName->fetch(PDO::FETCH_ASSOC);
@@ -98,10 +94,10 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
                 }
             }
         } 
-        
         catch (PDOException $e)
         {
-            echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
+            error_log("Error de base de datos (users): " . $e->getMessage(), 3, "error.log");
+            echo "<p style=\"color:red;\">Ocurrió un error, por favor inténtalo de nuevo más tarde</p>";
         }  
     }
     return $result;
@@ -110,14 +106,12 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
 
 function usuarioExistente($conn, $username, $email) {
 
-    $stmt = $conn->prepare("SELECT iduser FROM users WHERE username = $username OR mail = $email");
-    //ss, represta que le pasamos 2 string 
-    $stmt->bind_param("ss", $username, $email);
+    $stmt = $conn->prepare("SELECT iduser FROM users WHERE username = :username OR mail = :email");
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":email", $email);
     $stmt->execute();
-    $stmt->store_result();
-    $rows = $stmt->num_rows;
+    $rows = $stmt->rowCount();
     $stmt->close();
-
     return $rows > 0;
 }
 ?>

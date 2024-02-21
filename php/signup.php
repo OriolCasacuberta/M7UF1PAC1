@@ -1,11 +1,8 @@
 <?php
-    require "./lib/controlUserBD.php";
+    require "./../lib/controlUserBD.php";
 
     //CONECTAR CON LA BASE DE DADTOS
     $conn = getConnection();
-
-    //SIGN UP USUARIO
-    $phpSelf = htmlspecialchars($_SERVER["PHP_SELF"]); 
     
     function procesarSignUp(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,7 +28,7 @@
                     $stmt->bind_param("sssss", $email, $username, $hashedPassword, $firstName, $lastName);
 
                     if ($stmt->execute()) {
-                        echo "Registro exitoso";
+                        header("Location: ../index.php");
                     } else {
                         echo "Error al registrar el usuario: " . $stmt->error;
                     }
@@ -39,10 +36,12 @@
                     $stmt->close();
                 
                 }
+                else {
+                    echo "Error: Las contraseñas no coinciden.";
+                }
             }
         }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -58,9 +57,7 @@
     <body>
         <main>
 
-
             <h1>CREATE ACCOUNT</h1>
-            <form method = "post" action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>">
 
             <form method = "post" action="<?=procesarSignUp()?>">
 
@@ -116,8 +113,9 @@
                 <!-- SUBMIT -->
                 <button class="button" type="submit" id="signUpButton"><span>Sign Up</span></button>
                 
-                <button class="button" type="submit" id="back"><a href="../index.php"><span>Back to Log in</span></a></button>
+                
             </form>
+            <button class="button" type="submit" id="back"><a href="../index.php"><span>Back to Log in</span></a></button>
         </main>
     </body>
 </html>

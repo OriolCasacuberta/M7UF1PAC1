@@ -8,7 +8,11 @@ html,
 body {
     margin-top: 1.5em;
     width: 100%;
-    background: rgb(180, 230, 255);
+    background-image: url("https://img.freepik.com/vector-gratis/placa-circuito-patrones-fisuras_98292-3920.jpg?w=740&t=st=1708188328~exp=1708188928~hmac=446ae43edcecac02abed62696532e91ee1f0f163dbaecacd77c3e39e4e46c9de");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /*background: rgb(180, 230, 255);*/
     display: flex;
     justify-content: center;
     align-items: center;

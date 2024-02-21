@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        // Redirigir a index.php si el usuario no ha iniciado sesión
+        header("Location: ../index.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ca">
     <head>
@@ -7,8 +16,6 @@
         <link rel="stylesheet" href="../css/estils.css">
         <link rel="stylesheet" href="../css/home.css">
 
-
-        
     </head>
     <body>
         <main>
@@ -20,7 +27,7 @@
 
         </main>
         <aside>
-            <button class="button" type="submit"><span>Log out</span></button>
+            <button id="LogOut" class="button" type="submit"><span>Log out</span></button>
         </aside>
     </body>
 </html>
