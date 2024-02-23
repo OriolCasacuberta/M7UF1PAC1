@@ -12,7 +12,8 @@ function getConnection()
     $pass = DB_PASSWORD;
     $db = null;
 
-    try {
+    try
+    {
         $db = new PDO($connString, $user, $pass, [PDO::ATTR_PERSISTENT => true]);
     } catch (PDOException $e) { 
         echo "<p style=\"color:red;\">Error " . $e->getMessage() . "</p>";
@@ -33,9 +34,7 @@ function sanitize_user($user,$strict = false)
    $user = preg_replace('/[^a-zA-Z0-9 _.\-@]/', '', $user);
    
    // Reducir a ASCII si strict es true
-   if ($strict) {
-       $user = preg_replace('/[^a-zA-Z0-9_\-@]/', '', $user);
-   }
+   if ($strict) $user = preg_replace('/[^a-zA-Z0-9_\-@]/', '', $user);
    
    // Eliminar espacios adicionales
    $user = trim($user);
@@ -100,6 +99,7 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
             echo "<p style=\"color:red;\">Ocurrió un error, por favor inténtalo de nuevo más tarde</p>";
         }  
     }
+    
     return $result;
 }
 

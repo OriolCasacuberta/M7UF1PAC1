@@ -8,6 +8,18 @@
         <link rel="icon" type="image/jpg" href="./img/LogoIsitec.png"/>
         <link rel="stylesheet" href="./css/estils.css">
         <link rel="stylesheet" href="./css/index.css">
+        <script src="/js/script.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function()
+            {
+                var enlace = document.getElementById("fpass");
+                enlace.addEventListener("click", function(event)
+                {
+                    event.preventDefault();
+                    mostrarPopup();
+                });
+            });
+        </script>
     </head>
     <body>
         <main>
@@ -37,7 +49,7 @@
                 <button class="button" type="submit" class="signup"><a href="./php/signup.php"><span>Sign in</span></a></button>
                 <br>
                 <br>
-                <a id="fpass" href="" onclick=resetPassword()>Forgot Password?</a>
+                <a id="fpass" href="">Forgot Password?</a>
             </aside>
         </main>
     </body>
