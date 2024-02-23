@@ -104,17 +104,5 @@ function verificaUsuari($user, $pass,$esMail,$esUser)
 }
 
 
-function usuarioExistente($conn, $username, $email) {
-
-    $stmt = $conn->prepare("SELECT iduser FROM users WHERE username = :username OR mail = :email");
-    $stmt->bindParam(":username", $username);
-    $stmt->bindParam(":email", $email);
-    $stmt->execute();
-    $rows = $stmt->rowCount();
-    $stmt->close();
-    return $rows > 0;
-}
-?>
-
 
 
